@@ -8,8 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/dist')));
 
-let position = { position_x: 0.0, position_y: 0.0 };
-let state = { state: 0 };
+let position = { position_x: 0.0, position_y: 0.0, state: 0};
 
 router.get('/', (_, res) => {
 	res.sendFile('index.html', { root: path.join(__dirname, '/dist') });
@@ -17,6 +16,7 @@ router.get('/', (_, res) => {
 
 router.get('/position', (_, res) => {
 	res.status(200).send(position);
+	position.state = 0;
 });
 
 router.post('/position', (req, res) => {
